@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+  }
+
+  .dark body {
+    @apply bg-gray-900 text-white;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    @apply bg-gradient-to-l from-primary-600 via-purple-600 to-primary-700;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-l from-primary-600 to-purple-600 bg-clip-text text-transparent;
+  }
+}
+
