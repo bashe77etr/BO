@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { GraduationCap, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 
 const stages = ['ابتدائي', 'متوسط', 'ثانوي'];
 const gradesByStage: Record<string, string[]> = {
@@ -15,7 +15,7 @@ export default function SignUpPage() {
   const [selectedStage, setSelectedStage] = useState('');
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-bl from-primary-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-20 pb-12 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-bl from-primary-50 via-white to-accent-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-20 pb-12 px-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -23,10 +23,8 @@ export default function SignUpPage() {
       >
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center">
-              <GraduationCap className="w-7 h-7 text-white" />
-            </div>
-            <span className="text-2xl font-bold text-primary-700 dark:text-primary-400">منصة تعلّم</span>
+            <img src="/logo.png" alt="تعلّم" className="w-12 h-12 rounded-xl object-cover" />
+            <span className="text-2xl font-bold text-primary-800 dark:text-primary-400">منصة تعلّم</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">إنشاء حساب جديد</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">ابدأ رحلتك التعليمية اليوم</p>

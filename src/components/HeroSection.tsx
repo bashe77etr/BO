@@ -4,11 +4,11 @@ import { Play, ArrowLeft, Sparkles, BookOpen, Brain } from 'lucide-react';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-bl from-primary-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-20">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-bl from-primary-50 via-white to-accent-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-20">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary-200/30 dark:bg-primary-800/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-200/30 dark:bg-purple-800/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-200/30 dark:bg-accent-800/20 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-100/20 dark:bg-primary-900/10 rounded-full blur-3xl" />
       </div>
 
@@ -136,7 +136,7 @@ export default function HeroSection() {
               <motion.div
                 animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute -top-8 -right-8 w-32 h-32 rounded-2xl bg-purple-500 dark:bg-purple-600 shadow-xl p-4 flex flex-col items-center justify-center text-white z-20"
+                className="absolute -top-8 -right-8 w-32 h-32 rounded-2xl bg-accent-500 dark:bg-accent-600 shadow-xl p-4 flex flex-col items-center justify-center text-white z-20"
               >
                 <Brain className="w-8 h-8 mb-2" />
                 <p className="text-xs font-medium text-center">ذكاء اصطناعي</p>

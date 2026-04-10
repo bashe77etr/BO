@@ -12,7 +12,7 @@ const steps = [
     icon: Layers,
     title: 'اختر مرحلتك',
     description: 'حدد مرحلتك الدراسية وصفك لعرض المحتوى المناسب',
-    color: 'from-purple-500 to-purple-600',
+    color: 'from-accent-500 to-accent-600',
   },
   {
     icon: PlayCircle,
@@ -54,7 +54,7 @@ export default function HowItWorksSection() {
 
         <div className="relative">
           {/* Connection line */}
-          <div className="hidden lg:block absolute top-1/2 right-0 left-0 h-0.5 bg-gradient-to-l from-primary-200 via-purple-200 to-rose-200 dark:from-primary-800 dark:via-purple-800 dark:to-rose-800 -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-1/2 right-0 left-0 h-0.5 bg-gradient-to-l from-primary-200 via-accent-200 to-primary-300 dark:from-primary-800 dark:via-accent-800 dark:to-primary-700 -translate-y-1/2" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
             {steps.map((step, index) => (

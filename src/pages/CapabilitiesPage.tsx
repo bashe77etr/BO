@@ -21,8 +21,8 @@ const sectionsMeta: { key: Section; icon: typeof Brain; title: string; titleAr: 
     title: 'لفظي',
     titleAr: 'القسم اللفظي',
     description: 'أسئلة لغوية تقيس فهمك واستيعابك للنصوص والمفردات',
-    color: 'text-purple-600 bg-purple-50 dark:bg-purple-900/20',
-    gradient: 'from-purple-500 to-purple-600',
+    color: 'text-accent-600 bg-accent-50 dark:bg-accent-900/20',
+    gradient: 'from-accent-500 to-accent-600',
   },
   {
     key: 'scientific',

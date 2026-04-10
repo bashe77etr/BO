@@ -25,11 +25,11 @@
 
 @layer utilities {
   .gradient-primary {
-    @apply bg-gradient-to-l from-primary-600 via-purple-600 to-primary-700;
+    @apply bg-gradient-to-l from-primary-700 via-primary-800 to-brand-dark;
   }
 
   .gradient-text {
-    @apply bg-gradient-to-l from-primary-600 to-purple-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-l from-primary-600 to-accent-500 bg-clip-text text-transparent;
   }
 }
 

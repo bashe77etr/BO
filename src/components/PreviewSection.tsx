@@ -50,7 +50,7 @@ export default function PreviewSection() {
                   { label: 'الدروس المكتملة', value: '٤٥', icon: BookOpen, color: 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20' },
                   { label: 'الاختبارات', value: '١٢', icon: CheckCircle2, color: 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20' },
                   { label: 'ساعات الدراسة', value: '٣٨', icon: Clock, color: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20' },
-                  { label: 'المعدل', value: '٩٢٪', icon: Award, color: 'text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20' },
+                  { label: 'المعدل', value: '٩٢٪', icon: Award, color: 'text-accent-600 dark:text-accent-400 bg-accent-50 dark:bg-accent-900/20' },
                 ].map((stat) => (
                   <div key={stat.label} className="p-4 rounded-xl bg-gray-50 dark:bg-gray-700/50">
                     <div className={`w-10 h-10 rounded-lg ${stat.color} flex items-center justify-center mb-3`}>
@@ -74,7 +74,7 @@ export default function PreviewSection() {
                   { name: 'الرياضيات', progress: 78, color: 'bg-primary-500' },
                   { name: 'العلوم', progress: 65, color: 'bg-emerald-500' },
                   { name: 'لغتي الخالدة', progress: 90, color: 'bg-amber-500' },
-                  { name: 'الدراسات الاجتماعية', progress: 55, color: 'bg-purple-500' },
+                  { name: 'الدراسات الاجتماعية', progress: 55, color: 'bg-accent-500' },
                 ].map((subject) => (
                   <div key={subject.name} className="flex items-center gap-4">
                     <span className="w-36 text-sm font-medium text-gray-700 dark:text-gray-300">{subject.name}</span>

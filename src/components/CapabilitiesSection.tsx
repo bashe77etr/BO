@@ -14,7 +14,7 @@ const sections = [
     icon: BookText,
     title: 'القسم اللفظي',
     description: 'أسئلة لغوية تقيس فهمك واستيعابك للنصوص والمفردات',
-    color: 'from-purple-500 to-purple-600',
+    color: 'from-accent-500 to-accent-600',
     questions: 'أكثر من ٨٠٠ سؤال',
   },
   {

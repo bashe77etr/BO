@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Moon, Sun, GraduationCap } from 'lucide-react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const navLinks = [
@@ -53,10 +53,8 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
-              <GraduationCap className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-primary-700 dark:text-primary-400">
+            <img src="/logo.png" alt="تعلّم" className="w-10 h-10 rounded-xl object-cover" />
+            <span className="text-xl font-bold text-primary-800 dark:text-primary-400">
               منصة تعلّم
             </span>
           </Link>

@@ -16,13 +16,13 @@ const subjectsByStage: Record<Stage, { name: string; icon: typeof BookOpen; colo
     { name: 'الرياضيات', icon: Calculator, color: 'text-primary-600 bg-primary-50 dark:bg-primary-900/20' },
     { name: 'العلوم', icon: FlaskConical, color: 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20' },
     { name: 'لغتي', icon: Pen, color: 'text-amber-600 bg-amber-50 dark:bg-amber-900/20' },
-    { name: 'الدراسات الاجتماعية', icon: Globe, color: 'text-purple-600 bg-purple-50 dark:bg-purple-900/20' },
+    { name: 'الدراسات الاجتماعية', icon: Globe, color: 'text-accent-600 bg-accent-50 dark:bg-accent-900/20' },
   ],
   middle: [
     { name: 'الرياضيات', icon: Calculator, color: 'text-primary-600 bg-primary-50 dark:bg-primary-900/20' },
     { name: 'العلوم', icon: FlaskConical, color: 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20' },
     { name: 'لغتي الخالدة', icon: Pen, color: 'text-amber-600 bg-amber-50 dark:bg-amber-900/20' },
-    { name: 'الدراسات الاجتماعية', icon: Globe, color: 'text-purple-600 bg-purple-50 dark:bg-purple-900/20' },
+    { name: 'الدراسات الاجتماعية', icon: Globe, color: 'text-accent-600 bg-accent-50 dark:bg-accent-900/20' },
     { name: 'الحاسب وتقنية المعلومات', icon: Code, color: 'text-cyan-600 bg-cyan-50 dark:bg-cyan-900/20' },
   ],
   high: [

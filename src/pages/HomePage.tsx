@@ -7,6 +7,7 @@ import CapabilitiesSection from '../components/CapabilitiesSection';
 import PreviewSection from '../components/PreviewSection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import CTASection from '../components/CTASection';
+import SubscriptionSection from '../components/SubscriptionSection';
 
 export default function HomePage() {
   return (
@@ -19,6 +20,7 @@ export default function HomePage() {
       <CapabilitiesSection />
       <PreviewSection />
       <TestimonialsSection />
+      <SubscriptionSection />
       <CTASection />
     </>
   );

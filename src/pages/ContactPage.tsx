@@ -3,7 +3,7 @@ import { Mail, User, MessageSquare, Send, MapPin, Phone } from 'lucide-react';
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-bl from-primary-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-28 pb-20">
+    <div className="min-h-screen bg-gradient-to-bl from-primary-50 via-white to-accent-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-28 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,7 +28,7 @@ export default function ContactPage() {
           >
             {[
               { icon: Mail, title: 'البريد الإلكتروني', value: 'info@taalm.sa', color: 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400' },
-              { icon: Phone, title: 'الهاتف', value: '+966 50 000 0000', color: 'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400' },
+              { icon: Phone, title: 'الهاتف', value: '+966 50 000 0000', color: 'bg-accent-50 dark:bg-accent-900/20 text-accent-600 dark:text-accent-400' },
               { icon: MapPin, title: 'الموقع', value: 'المملكة العربية السعودية', color: 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400' },
             ].map((item) => (
               <div key={item.title} className="flex items-center gap-4 p-5 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700">

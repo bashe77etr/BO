@@ -16,8 +16,8 @@ const paths = [
     title: 'تدريب القدرات والتحصيلي',
     description: 'استعد للاختبارات بتمارين ذكية ونماذج محاكاة',
     href: '/capabilities',
-    color: 'bg-purple-500',
-    lightBg: 'bg-purple-50 dark:bg-purple-900/20',
+    color: 'bg-accent-500',
+    lightBg: 'bg-accent-50 dark:bg-accent-900/20',
   },
   {
     icon: Search,
@@ -81,7 +81,7 @@ export default function QuickPathSection() {
                 className="block group p-6 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:border-primary-200 dark:hover:border-primary-700 transition-all duration-300 h-full"
               >
                 <div className={`w-14 h-14 rounded-xl ${path.lightBg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                  <path.icon className={`w-7 h-7 ${path.color === 'bg-primary-500' ? 'text-primary-600' : path.color === 'bg-purple-500' ? 'text-purple-600' : path.color === 'bg-emerald-500' ? 'text-emerald-600' : 'text-amber-600'} dark:opacity-90`} />
+                  <path.icon className={`w-7 h-7 ${path.color === 'bg-primary-500' ? 'text-primary-600' : path.color === 'bg-accent-500' ? 'text-accent-600' : path.color === 'bg-emerald-500' ? 'text-emerald-600' : 'text-amber-600'} dark:opacity-90`} />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                   {path.title}

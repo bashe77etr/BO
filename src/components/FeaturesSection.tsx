@@ -13,8 +13,8 @@ const features = [
     icon: ClipboardCheck,
     title: 'اختبارات تفاعلية',
     description: 'اختبر نفسك بأسئلة متنوعة مع تصحيح فوري وتحليل للأداء',
-    color: 'text-purple-600 dark:text-purple-400',
-    bg: 'bg-purple-50 dark:bg-purple-900/20',
+    color: 'text-accent-600 dark:text-accent-400',
+    bg: 'bg-accent-50 dark:bg-accent-900/20',
   },
   {
     icon: TrendingUp,
@@ -34,8 +34,8 @@ const features = [
     icon: Lightbulb,
     title: 'محتوى محدّث باستمرار',
     description: 'محتوى يتوافق مع أحدث المناهج السعودية المعتمدة',
-    color: 'text-rose-600 dark:text-rose-400',
-    bg: 'bg-rose-50 dark:bg-rose-900/20',
+    color: 'text-primary-700 dark:text-primary-400',
+    bg: 'bg-primary-100 dark:bg-primary-900/20',
   },
   {
     icon: Users,

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { GraduationCap } from 'lucide-react';
 
 const footerLinks = [
   {
@@ -44,9 +43,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
-                <GraduationCap className="w-6 h-6 text-white" />
-              </div>
+              <img src="/logo.png" alt="تعلّم" className="w-10 h-10 rounded-xl object-cover" />
               <span className="text-xl font-bold text-white">منصة تعلّم</span>
             </Link>
             <p className="text-sm leading-relaxed">
