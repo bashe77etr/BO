@@ -1,10 +1,86 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
+import { Mail, Lock, Eye, EyeOff, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
+
+interface FormErrors {
+  email?: string;
+  password?: string;
+  general?: string;
+}
+
+const validateEmail = (email: string): string | undefined => {
+  if (!email.trim()) return 'البريد الإلكتروني مطلوب';
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(email)) return 'صيغة البريد الإلكتروني غير صحيحة';
+  return undefined;
+};
+
+const validatePassword = (password: string): string | undefined => {
+  if (!password) return 'كلمة المرور مطلوبة';
+  if (password.length < 6) return 'كلمة المرور يجب أن تكون ٦ أحرف على الأقل';
+  return undefined;
+};
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
+
+  const handleBlur = (field: string) => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+    if (field === 'email') {
+      const error = validateEmail(email);
+      setErrors(prev => ({ ...prev, email: error }));
+    }
+    if (field === 'password') {
+      const error = validatePassword(password);
+      setErrors(prev => ({ ...prev, password: error }));
+    }
+  };
+
+  const handleEmailChange = (value: string) => {
+    setEmail(value);
+    if (touched.email) {
+      setErrors(prev => ({ ...prev, email: validateEmail(value) }));
+    }
+  };
+
+  const handlePasswordChange = (value: string) => {
+    setPassword(value);
+    if (touched.password) {
+      setErrors(prev => ({ ...prev, password: validatePassword(value) }));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
+
+    setTouched({ email: true, password: true });
+    setErrors({ email: emailError, password: passwordError });
+
+    if (emailError || passwordError) return;
+
+    setIsSubmitting(true);
+    setErrors({});
+
+    // Simulate authentication delay
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setLoginSuccess(true);
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 1500);
+    }, 1200);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-bl from-primary-50 via-white to-accent-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-20 pb-12 px-4">
@@ -21,6 +97,24 @@ export default function LoginPage() {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">تسجيل الدخول</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">مرحبًا بعودتك!</p>
         </div>
+
+        {/* Success Message */}
+        <AnimatePresence>
+          {loginSuccess && (
+            <motion.div
+              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="mb-4 p-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 rounded-xl flex items-center gap-3"
+            >
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium text-emerald-800 dark:text-emerald-300">تم تسجيل الدخول بنجاح!</p>
+                <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5">جاري التحويل إلى لوحة التحكم...</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 p-8">
           {/* Social Login */}
@@ -49,27 +143,56 @@ export default function LoginPage() {
           </div>
 
           {/* Form */}
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-4" onSubmit={handleSubmit} noValidate>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">البريد الإلكتروني</label>
               <div className="relative">
-                <Mail className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Mail className={`absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 ${errors.email && touched.email ? 'text-rose-400' : 'text-gray-400'}`} />
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => handleEmailChange(e.target.value)}
+                  onBlur={() => handleBlur('email')}
                   placeholder="example@email.com"
-                  className="w-full pr-10 pl-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
+                  className={`w-full pr-10 pl-4 py-3 rounded-xl border ${
+                    errors.email && touched.email
+                      ? 'border-rose-400 dark:border-rose-500 bg-rose-50 dark:bg-rose-900/10 focus:ring-rose-500'
+                      : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 focus:ring-primary-500'
+                  } text-gray-900 dark:text-white focus:ring-2 focus:border-transparent outline-none transition-all`}
+                  disabled={isSubmitting || loginSuccess}
                 />
               </div>
+              <AnimatePresence>
+                {errors.email && touched.email && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -5, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: 'auto' }}
+                    exit={{ opacity: 0, y: -5, height: 0 }}
+                    className="flex items-center gap-1 mt-1.5 text-xs text-rose-600 dark:text-rose-400"
+                  >
+                    <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                    {errors.email}
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">كلمة المرور</label>
               <div className="relative">
-                <Lock className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Lock className={`absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 ${errors.password && touched.password ? 'text-rose-400' : 'text-gray-400'}`} />
                 <input
                   type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => handlePasswordChange(e.target.value)}
+                  onBlur={() => handleBlur('password')}
                   placeholder="أدخل كلمة المرور"
-                  className="w-full pr-10 pl-10 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
+                  className={`w-full pr-10 pl-10 py-3 rounded-xl border ${
+                    errors.password && touched.password
+                      ? 'border-rose-400 dark:border-rose-500 bg-rose-50 dark:bg-rose-900/10 focus:ring-rose-500'
+                      : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 focus:ring-primary-500'
+                  } text-gray-900 dark:text-white focus:ring-2 focus:border-transparent outline-none transition-all`}
+                  disabled={isSubmitting || loginSuccess}
                 />
                 <button
                   type="button"
@@ -79,6 +202,19 @@ export default function LoginPage() {
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
+              <AnimatePresence>
+                {errors.password && touched.password && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -5, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: 'auto' }}
+                    exit={{ opacity: 0, y: -5, height: 0 }}
+                    className="flex items-center gap-1 mt-1.5 text-xs text-rose-600 dark:text-rose-400"
+                  >
+                    <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                    {errors.password}
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </div>
 
             <div className="flex items-center justify-between">
@@ -93,9 +229,22 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full py-3 text-white font-semibold gradient-primary rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary-500/25"
+              disabled={isSubmitting || loginSuccess}
+              className="w-full py-3 text-white font-semibold gradient-primary rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary-500/25 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              تسجيل الدخول
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  جاري تسجيل الدخول...
+                </>
+              ) : loginSuccess ? (
+                <>
+                  <CheckCircle2 className="w-5 h-5" />
+                  تم تسجيل الدخول
+                </>
+              ) : (
+                'تسجيل الدخول'
+              )}
             </button>
           </form>
 
