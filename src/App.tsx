@@ -18,6 +18,7 @@ import ExamInterface from './pages/dashboard/ExamInterface';
 import CapabilitiesInterface from './pages/dashboard/CapabilitiesInterface';
 import AnalyticsDashboard from './pages/dashboard/AnalyticsDashboard';
 import AIChatInterface from './pages/dashboard/AIChatInterface';
+import BookViewer from './pages/dashboard/BookViewer';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -60,6 +61,7 @@ function App() {
             <Route path="/dashboard/capabilities" element={<ProtectedRoute><CapabilitiesInterface /></ProtectedRoute>} />
             <Route path="/dashboard/analytics" element={<ProtectedRoute><AnalyticsDashboard /></ProtectedRoute>} />
             <Route path="/dashboard/ai-chat" element={<ProtectedRoute><AIChatInterface /></ProtectedRoute>} />
+            <Route path="/dashboard/book" element={<ProtectedRoute><BookViewer /></ProtectedRoute>} />
           </Routes>
         </Router>
       </AuthProvider>

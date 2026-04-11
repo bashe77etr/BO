@@ -19,6 +19,7 @@ export interface Subject {
   icon: string;
   color: string;
   chapters: Chapter[];
+  bookUrl?: string;
 }
 
 export interface GradeData {

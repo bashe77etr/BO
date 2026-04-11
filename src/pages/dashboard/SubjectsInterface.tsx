@@ -5,7 +5,7 @@ import {
   Laptop, ChevronLeft, ChevronDown, Sparkles, Brain, FileText, Play,
   CheckCircle2, BookOpen, Book
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DashboardLayout from '../../components/dashboard/DashboardLayout';
 import { useAuth } from '../../context/AuthContext';
 import { getSubjectsForStudent, getStageLabel, getGradeLabel } from '../../data/saudiCurriculum';
@@ -19,6 +19,7 @@ export default function SubjectsInterface() {
   const [selectedSubjectId, setSelectedSubjectId] = useState<string | null>(null);
   const [expandedChapter, setExpandedChapter] = useState<string | null>(null);
   const [aiAction, setAiAction] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const stage = user?.stage || 'ثانوي';
   const grade = user?.grade || 'الثالث';
@@ -77,8 +78,18 @@ export default function SubjectsInterface() {
                     className={`h-full rounded-full bg-gradient-to-l ${subject.color}`}
                   />
                 </div>
-                <div className="flex justify-between mt-2">
+                <div className="flex justify-between items-center mt-2">
                   <span className="text-xs text-gray-400">ابدأ الدراسة</span>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/dashboard/book?subjectId=${subject.id}`);
+                    }}
+                    className="flex items-center gap-1 text-xs text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium transition-colors"
+                  >
+                    <BookOpen className="w-3.5 h-3.5" />
+                    افتح الكتاب
+                  </button>
                 </div>
               </motion.div>
             );
