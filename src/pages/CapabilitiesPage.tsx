@@ -201,7 +201,7 @@ export default function CapabilitiesPage() {
                         className={`w-full flex items-center gap-3 p-4 rounded-xl border-2 transition-all text-right ${buttonClass}`}
                       >
                         <span className="w-8 h-8 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 flex items-center justify-center text-sm font-bold flex-shrink-0">
-                          {String.fromCharCode(1571 + index)}
+                          {['أ', 'ب', 'ج', 'د'][index]}
                         </span>
                         <span className="font-medium flex-1">{option}</span>
                         {showResult && index === question.correct && (

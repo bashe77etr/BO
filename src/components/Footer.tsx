@@ -74,7 +74,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="border-t border-gray-800 pt-8 text-center text-sm">
           <p>
-            جميع الحقوق محفوظة &copy; {new Date().getFullYear()} منصة تعلّم. صُنع بـ في المملكة العربية السعودية.
+            جميع الحقوق محفوظة &copy; {new Date().getFullYear()} منصة تعلّم. صُنع بـ ❤️ في المملكة العربية السعودية.
           </p>
         </div>
       </div>

@@ -11,7 +11,6 @@ import LoginPage from './pages/LoginPage';
 import ContactPage from './pages/ContactPage';
 import SubjectsPage from './pages/SubjectsPage';
 import CapabilitiesPage from './pages/CapabilitiesPage';
-import AIFloatingButton from './components/dashboard/AIFloatingButton';
 import SmartDashboard from './pages/dashboard/SmartDashboard';
 import SubjectsInterface from './pages/dashboard/SubjectsInterface';
 import LessonView from './pages/dashboard/LessonView';
@@ -62,8 +61,6 @@ function App() {
             <Route path="/dashboard/analytics" element={<ProtectedRoute><AnalyticsDashboard /></ProtectedRoute>} />
             <Route path="/dashboard/ai-chat" element={<ProtectedRoute><AIChatInterface /></ProtectedRoute>} />
           </Routes>
-          {/* Global AI Floating Button on dashboard pages */}
-          <AIFloatingButton />
         </Router>
       </AuthProvider>
     </ThemeProvider>
