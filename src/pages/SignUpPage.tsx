@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, Eye, EyeOff, AlertCircle, CheckCircle2, Loader2, Check, X } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const stages = ['ابتدائي', 'متوسط', 'ثانوي'];
 const gradesByStage: Record<string, string[]> = {
@@ -62,6 +63,7 @@ const validateConfirmPassword = (password: string, confirmPassword: string): str
 
 export default function SignUpPage() {
   const navigate = useNavigate();
+  const { signup } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [name, setName] = useState('');
@@ -137,14 +139,25 @@ export default function SignUpPage() {
     setIsSubmitting(true);
     setErrors({});
 
-    // Simulate account creation delay
+    // Real account creation with localStorage
     setTimeout(() => {
+      const result = signup({
+        name,
+        email,
+        password,
+        stage: selectedStage,
+        grade: selectedGrade,
+      });
       setIsSubmitting(false);
-      setSignupSuccess(true);
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 1500);
-    }, 1500);
+      if (result.success) {
+        setSignupSuccess(true);
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 1500);
+      } else {
+        setErrors({ email: result.error });
+      }
+    }, 500);
   };
 
   const inputClass = (field: string) =>

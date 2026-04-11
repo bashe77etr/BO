@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 interface FormErrors {
   email?: string;
@@ -24,6 +25,7 @@ const validatePassword = (password: string): string | undefined => {
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -72,14 +74,19 @@ export default function LoginPage() {
     setIsSubmitting(true);
     setErrors({});
 
-    // Simulate authentication delay
+    // Real authentication against localStorage
     setTimeout(() => {
+      const result = login(email, password);
       setIsSubmitting(false);
-      setLoginSuccess(true);
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 1500);
-    }, 1200);
+      if (result.success) {
+        setLoginSuccess(true);
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 1500);
+      } else {
+        setErrors({ general: result.error });
+      }
+    }, 500);
   };
 
   return (
@@ -97,6 +104,21 @@ export default function LoginPage() {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">تسجيل الدخول</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">مرحبًا بعودتك!</p>
         </div>
+
+        {/* General Error Message */}
+        <AnimatePresence>
+          {errors.general && (
+            <motion.div
+              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="mb-4 p-4 bg-rose-50 dark:bg-rose-900/30 border border-rose-200 dark:border-rose-800 rounded-xl flex items-center gap-3"
+            >
+              <AlertCircle className="w-5 h-5 text-rose-600 dark:text-rose-400 flex-shrink-0" />
+              <p className="text-sm font-medium text-rose-800 dark:text-rose-300">{errors.general}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Success Message */}
         <AnimatePresence>

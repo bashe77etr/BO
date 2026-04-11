@@ -6,6 +6,8 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import DashboardLayout from '../../components/dashboard/DashboardLayout';
+import { useAuth } from '../../context/AuthContext';
+import { getStageLabel, getGradeLabel } from '../../data/saudiCurriculum';
 
 const dailyPlan = [
   { id: 1, subject: 'الرياضيات', lesson: 'المعادلات التربيعية', duration: '30 دقيقة', done: true },
@@ -33,7 +35,11 @@ const aiSuggestions = [
 ];
 
 export default function SmartDashboard() {
+  const { user } = useAuth();
   const [showAIPlan, setShowAIPlan] = useState(false);
+  const userName = user?.name || 'الطالب';
+  const stageLabel = getStageLabel(user?.stage || '');
+  const gradeLabel = getGradeLabel(user?.stage || '', user?.grade || '');
 
   return (
     <DashboardLayout>
@@ -49,8 +55,8 @@ export default function SmartDashboard() {
           <div className="relative z-10">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-2">مرحبًا، أحمد! 👋</h2>
-                <p className="text-primary-200 text-sm md:text-base">الصف الثالث الثانوي - المسار العلمي</p>
+                <h2 className="text-2xl md:text-3xl font-bold mb-2">مرحبًا، {userName}! 👋</h2>
+                <p className="text-primary-200 text-sm md:text-base">{stageLabel} - {gradeLabel}</p>
                 <div className="flex items-center gap-4 mt-4">
                   <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-1.5">
                     <TrendingUp className="w-4 h-4" />

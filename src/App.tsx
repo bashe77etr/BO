@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
@@ -39,29 +41,31 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
 function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <ScrollToTop />
-        <Routes>
-          {/* Public Pages */}
-          <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
-          <Route path="/signup" element={<PublicLayout><SignUpPage /></PublicLayout>} />
-          <Route path="/login" element={<PublicLayout><LoginPage /></PublicLayout>} />
-          <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
-          <Route path="/subjects" element={<PublicLayout><SubjectsPage /></PublicLayout>} />
-          <Route path="/capabilities" element={<PublicLayout><CapabilitiesPage /></PublicLayout>} />
+      <AuthProvider>
+        <Router>
+          <ScrollToTop />
+          <Routes>
+            {/* Public Pages */}
+            <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
+            <Route path="/signup" element={<PublicLayout><SignUpPage /></PublicLayout>} />
+            <Route path="/login" element={<PublicLayout><LoginPage /></PublicLayout>} />
+            <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
+            <Route path="/subjects" element={<PublicLayout><SubjectsPage /></PublicLayout>} />
+            <Route path="/capabilities" element={<PublicLayout><CapabilitiesPage /></PublicLayout>} />
 
-          {/* Dashboard Pages */}
-          <Route path="/dashboard" element={<SmartDashboard />} />
-          <Route path="/dashboard/subjects" element={<SubjectsInterface />} />
-          <Route path="/dashboard/lesson" element={<LessonView />} />
-          <Route path="/dashboard/exams" element={<ExamInterface />} />
-          <Route path="/dashboard/capabilities" element={<CapabilitiesInterface />} />
-          <Route path="/dashboard/analytics" element={<AnalyticsDashboard />} />
-          <Route path="/dashboard/ai-chat" element={<AIChatInterface />} />
-        </Routes>
-        {/* Global AI Floating Button on dashboard pages */}
-        <AIFloatingButton />
-      </Router>
+            {/* Protected Dashboard Pages */}
+            <Route path="/dashboard" element={<ProtectedRoute><SmartDashboard /></ProtectedRoute>} />
+            <Route path="/dashboard/subjects" element={<ProtectedRoute><SubjectsInterface /></ProtectedRoute>} />
+            <Route path="/dashboard/lesson" element={<ProtectedRoute><LessonView /></ProtectedRoute>} />
+            <Route path="/dashboard/exams" element={<ProtectedRoute><ExamInterface /></ProtectedRoute>} />
+            <Route path="/dashboard/capabilities" element={<ProtectedRoute><CapabilitiesInterface /></ProtectedRoute>} />
+            <Route path="/dashboard/analytics" element={<ProtectedRoute><AnalyticsDashboard /></ProtectedRoute>} />
+            <Route path="/dashboard/ai-chat" element={<ProtectedRoute><AIChatInterface /></ProtectedRoute>} />
+          </Routes>
+          {/* Global AI Floating Button on dashboard pages */}
+          <AIFloatingButton />
+        </Router>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

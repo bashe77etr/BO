@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, BookOpen, FileText,
@@ -7,6 +7,7 @@ import {
   LogOut, ChevronLeft, Sparkles
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
+import { useAuth } from '../../context/AuthContext';
 import AIFloatingButton from './AIFloatingButton';
 
 const navItems = [
@@ -26,7 +27,16 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
+  const { user, logout } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
+  const userInitial = user?.name?.charAt(0) || 'ط';
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex" dir="rtl">
@@ -79,10 +89,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             {isDark ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5 text-indigo-500" />}
             {sidebarOpen && <span className="text-sm">{isDark ? 'الوضع النهاري' : 'الوضع الليلي'}</span>}
           </button>
-          <Link to="/" className="flex items-center gap-3 px-3 py-2.5 rounded-xl w-full text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+          <button onClick={handleLogout} className="flex items-center gap-3 px-3 py-2.5 rounded-xl w-full text-gray-600 dark:text-gray-400 hover:bg-rose-50 dark:hover:bg-rose-900/20 hover:text-rose-600 dark:hover:text-rose-400 transition-all">
             <LogOut className="w-5 h-5 text-red-500" />
-            {sidebarOpen && <span className="text-sm">الصفحة الرئيسية</span>}
-          </Link>
+            {sidebarOpen && <span className="text-sm">تسجيل الخروج</span>}
+          </button>
         </div>
       </motion.aside>
 
@@ -168,7 +178,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <span className="text-xs font-medium text-primary-700 dark:text-primary-400">الذكاء الاصطناعي نشط</span>
               </div>
               <div className="w-9 h-9 rounded-full bg-primary-600 flex items-center justify-center text-white text-sm font-bold">
-                أ
+                {userInitial}
               </div>
             </div>
           </div>
